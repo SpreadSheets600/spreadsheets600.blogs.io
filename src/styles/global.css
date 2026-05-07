@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: Geist Sans, ui-sans-serif, system-ui, sans-serif,
+  --font-sans: 'Poppins', Geist Sans, ui-sans-serif, system-ui, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --font-mono: Geist Mono, ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, 'Liberation Mono', 'Courier New', monospace;
@@ -48,13 +48,13 @@
   body {
     @apply font-sans antialiased;
     @apply flex flex-col;
-    @apply bg-neutral-100 dark:bg-neutral-900;
+    @apply bg-neutral-100 dark:bg-transparent;
     @apply text-black/75 dark:text-white/75;
   }
 
   header {
     @apply fixed left-0 right-0 top-0 z-50 py-6;
-    @apply bg-neutral-100/75 dark:bg-neutral-900/75;
+    @apply bg-neutral-100/75 dark:bg-transparent;
     @apply saturate-200 backdrop-blur-xs;
   }
 
@@ -82,6 +82,31 @@
   article a:hover {
     @apply text-black dark:text-white;
     @apply decoration-black/50 dark:decoration-white/50;
+  }
+
+  /* Reference theme card styles ported to v4 utilities */
+  .card-shell {
+    @apply overflow-hidden rounded-xl border border-white/10 bg-black/40 backdrop-blur-md transition-all duration-300 hover:border-white/20 hover:shadow-lg;
+  }
+
+  .card-shell-lg {
+    @apply overflow-hidden rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md transition-all duration-300 hover:border-white/20 hover:shadow-lg;
+  }
+
+  .card-pad {
+    @apply p-4 sm:p-5;
+  }
+
+  .card-header {
+    @apply border-b border-white/5 px-5 py-3;
+  }
+
+  .card-empty {
+    @apply rounded-2xl border border-white/10 bg-black/40 p-8 text-center text-white/60 backdrop-blur-xl;
+  }
+
+  .card-skeleton {
+    @apply animate-pulse rounded-xl border border-white/10 bg-black/40 backdrop-blur-md;
   }
 }
 
@@ -123,7 +148,7 @@ pre {
 
 .dark {
   --astro-code-foreground: #fafafa;
-  --astro-code-background: #09090b;
+  --astro-code-background: transparent;
   --astro-code-token-comment: #a19595;
   --astro-code-token-keyword: #f47067;
   --astro-code-token-string: #00a99a;
@@ -137,11 +162,11 @@ pre {
 
 /* copy code button on codeblocks */
 .copy-code {
-  @apply absolute right-3 top-3 grid size-9 place-content-center rounded-sm border border-black/15 bg-neutral-100 text-center duration-300 ease-in-out dark:border-white/20 dark:bg-neutral-900;
+  @apply absolute right-3 top-3 grid size-9 place-content-center rounded-sm border border-black/15 bg-neutral-100 text-center duration-300 ease-in-out dark:border-white/20 dark:bg-black/40;
 }
 
 .copy-code:hover {
-  @apply bg-[#E9E9E9] transition-colors dark:bg-[#232323];
+  @apply bg-[#E9E9E9] transition-colors dark:bg-white/10;
 }
 
 .copy-code:active {

@@ -2,41 +2,30 @@
 import type { CollectionEntry } from "astro:content";
 
 type Props = {
-  entry: CollectionEntry<"blog"> | CollectionEntry<"projects">;
+  entry: CollectionEntry<"blog"> | CollectionEntry<"links"> | CollectionEntry<"prompts">;
 };
 
 const { entry } = Astro.props as {
-  entry: CollectionEntry<"blog"> | CollectionEntry<"projects">;
+  entry: CollectionEntry<"blog"> | CollectionEntry<"links"> | CollectionEntry<"prompts">;
 };
+
+const href = entry.collection === 'links' && entry.data.url ? entry.data.url : `/${entry.collection}/${entry.id}`;
 ---
 
 <a
-  href={`/${entry.collection}/${entry.id}`}
-  class="not-prose group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pr-10 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"
+  href={href}
+  target={entry.collection === 'links' ? "_blank" : "_self"}
+  rel={entry.collection === 'links' ? "noopener noreferrer" : ""}
+  class="group card-shell flex flex-nowrap items-center px-4 py-4 pr-10 hover:-translate-y-1 hover:bg-black/50 relative"
 >
   <div class="flex flex-1 flex-col truncate">
-    <div class="font-semibold">
+    <div class="font-semibold text-base sm:text-lg text-black dark:text-white">
       {entry.data.title}
     </div>
-    <div class="text-sm">
+    <div class="text-xs sm:text-sm text-black/75 dark:text-white/75 truncate">
       {entry.data.description}
     </div>
   </div>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    class="absolute right-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"
-  >
-    <line
-      x1="5"
-      y1="12"
-      x2="19"
-      y2="12"
-      class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"
-    ></line>
-    <polyline
-      points="12 5 19 12 12 19"
-      class="-translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"
-    ></polyline>
-  </svg>
+  <i class="ph ph-arrow-right absolute right-4 top-1/2 -translate-y-1/2 -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 text-xl text-black dark:text-white"></i>
 </a>
+

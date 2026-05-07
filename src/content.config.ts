@@ -12,16 +12,28 @@ const blog = defineCollection({
   }),
 });
 
-const projects = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: "./src/content/projects" }),
+const links = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: "./src/content/links" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
     date: z.coerce.date(),
     draft: z.boolean().optional(),
-    demoURL: z.string().optional(),
-    repoURL: z.string().optional(),
+    url: z.string().optional(),
+    tags: z.array(z.string()).optional(),
   }),
 });
 
-export const collections = { blog, projects };
+const prompts = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: "./src/content/prompts" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.coerce.date(),
+    draft: z.boolean().optional(),
+    tags: z.array(z.string()).optional(),
+  }),
+});
+
+export const collections = { blog, links, prompts };
+

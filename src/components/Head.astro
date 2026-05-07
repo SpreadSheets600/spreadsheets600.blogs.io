@@ -36,10 +36,6 @@ const { title, description, image = "/astro-micro.jpg" } = Astro.props;
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link
-  rel="icon"
-  href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>"
-/>
 <meta name="generator" content={Astro.generator} />
 
 <!-- Canonical URL -->
@@ -213,19 +209,20 @@ const { title, description, image = "/astro-micro.jpg" } = Astro.props;
   }
 
   function addCopyCodeButtons() {
-    let copyButtonLabel = "📋";
+    let copyButtonIcon = "<i class='ph ph-copy'></i>";
+    let checkIcon = "<i class='ph ph-check text-green-500'></i>";
     let codeBlocks = Array.from(document.querySelectorAll("pre"));
 
     async function copyCode(codeBlock, copyButton) {
-      const codeText = codeBlock.innerText;
-      const buttonText = copyButton.innerText;
-      const textToCopy = codeText.replace(buttonText, "");
+      // Find the code element to get text without the button's text
+      const codeElement = codeBlock.querySelector("code");
+      const textToCopy = codeElement ? codeElement.innerText : codeBlock.innerText.replace(copyButton.innerText, "");
 
       await navigator.clipboard.writeText(textToCopy);
-      copyButton.innerText = "✅";
+      copyButton.innerHTML = checkIcon;
 
       setTimeout(() => {
-        copyButton.innerText = copyButtonLabel;
+        copyButton.innerHTML = copyButtonIcon;
       }, 2000);
     }
 
@@ -234,8 +231,8 @@ const { title, description, image = "/astro-micro.jpg" } = Astro.props;
       wrapper.style.position = "relative";
 
       const copyButton = document.createElement("button");
-      copyButton.innerText = copyButtonLabel;
-      copyButton.classList = "copy-code";
+      copyButton.innerHTML = copyButtonIcon;
+      copyButton.classList = "copy-code flex items-center justify-center text-lg";
 
       codeBlock.setAttribute("tabindex", "0");
       codeBlock.appendChild(copyButton);

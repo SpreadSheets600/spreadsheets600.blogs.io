@@ -18,10 +18,14 @@ export const BLOG: Metadata = {
   DESCRIPTION: "A collection of articles on topics I am passionate about.",
 };
 
-export const PROJECTS: Metadata = {
-  TITLE: "Projects",
-  DESCRIPTION:
-    "A collection of my projects with links to repositories and live demos.",
+export const LINKS: Metadata = {
+  TITLE: "Links",
+  DESCRIPTION: "A collection of useful links.",
+};
+
+export const PROMPTS: Metadata = {
+  TITLE: "Prompts",
+  DESCRIPTION: "A collection of useful prompts.",
 };
 
 export const SOCIALS: Socials = [
@@ -38,3 +42,4 @@ export const SOCIALS: Socials = [
     HREF: "https://trevortylerlee.com",
   },
 ];
+
