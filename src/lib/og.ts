@@ -5,8 +5,7 @@ interface OGOptions {
   description?: string;
 }
 
-const FONT_STACK =
-  "'Poppins', 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif";
+const FONT_STACK = "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif";
 
 function escapeXml(str: string): string {
   return str
@@ -34,16 +33,62 @@ function wrapText(text: string, maxCharsPerLine: number): string {
   return lines.join("\n");
 }
 
+function stringToHash(str: string): number {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash = hash & hash;
+  }
+  return Math.abs(hash);
+}
+
+const PALETTES = [
+  ["#FF0080", "#7928CA", "#FF0080"],
+  ["#00DFD8", "#007CF0", "#00DFD8"],
+  ["#FF4D4D", "#F9CB28", "#FF4D4D"],
+  ["#00F260", "#0575E6", "#00F260"],
+  ["#8A2387", "#E94057", "#F27121"],
+  ["#4158D0", "#C850C0", "#FFCC70"],
+  ["#0093E9", "#80D0C7", "#0093E9"],
+  ["#85FFBD", "#FFFB7D", "#85FFBD"],
+  ["#fa709a", "#fee140", "#fa709a"],
+];
+
+function getDynamicBlobs(title: string): string {
+  const hash = stringToHash(title);
+  const colors = PALETTES[hash % PALETTES.length];
+  
+  // Deterministic random positions based on hash
+  const cx1 = 150 + (hash % 300);
+  const cy1 = 100 + ((hash >> 2) % 200);
+  const r1 = 300 + ((hash >> 4) % 150);
+
+  const cx2 = 800 + ((hash >> 6) % 300);
+  const cy2 = 400 + ((hash >> 8) % 200);
+  const r2 = 350 + ((hash >> 10) % 150);
+
+  const cx3 = 600 + ((hash >> 12) % 200) * (hash % 2 === 0 ? 1 : -1);
+  const cy3 = 250 + ((hash >> 14) % 200);
+  const r3 = 250 + ((hash >> 16) % 150);
+
+  return `
+    <circle cx="${cx1}" cy="${cy1}" r="${r1}" fill="${colors[0]}" opacity="0.65" filter="url(#blur)" />
+    <circle cx="${cx2}" cy="${cy2}" r="${r2}" fill="${colors[1]}" opacity="0.65" filter="url(#blur)" />
+    <circle cx="${cx3}" cy="${cy3}" r="${r3}" fill="${colors[2] || colors[0]}" opacity="0.5" filter="url(#blur)" />
+  `;
+}
+
 function getTypeIcon(type: string): string {
   switch (type) {
     case "Blog":
-      return `<svg width="24" height="24" viewBox="0 0 256 256" fill="none"><rect width="256" height="256" rx="48" fill="rgba(255,255,255,0.1)"/><path d="M88 176h80M88 128h80M88 80h48" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M160 40h40a8 8 0 0 1 8 8v160a8 8 0 0 1-8 8H56a8 8 0 0 1-8-8V48a8 8 0 0 1 8-8h40" stroke="rgba(255,255,255,0.6)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
+      return `<svg width="20" height="20" viewBox="0 0 256 256" fill="none"><path d="M88 176h80M88 128h80M88 80h48" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><path d="M160 40h40a8 8 0 0 1 8 8v160a8 8 0 0 1-8 8H56a8 8 0 0 1-8-8V48a8 8 0 0 1 8-8h40" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     case "Link":
-      return `<svg width="24" height="24" viewBox="0 0 256 256" fill="none"><rect width="256" height="256" rx="48" fill="rgba(255,255,255,0.1)"/><path d="M132 96h24a36 36 0 0 1 0 72h-24M124 160h-24a36 36 0 0 1 0-72h24" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M92 128h72" stroke="rgba(255,255,255,0.6)" stroke-width="12" stroke-linecap="round" fill="none"/></svg>`;
+      return `<svg width="20" height="20" viewBox="0 0 256 256" fill="none"><path d="M132 96h24a36 36 0 0 1 0 72h-24M124 160h-24a36 36 0 0 1 0-72h24" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><path d="M92 128h72" stroke="currentColor" stroke-width="16" stroke-linecap="round"/></svg>`;
     case "Prompt":
-      return `<svg width="24" height="24" viewBox="0 0 256 256" fill="none"><rect width="256" height="256" rx="48" fill="rgba(255,255,255,0.1)"/><polyline points="96 64 160 128 96 192" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
+      return `<svg width="20" height="20" viewBox="0 0 256 256" fill="none"><polyline points="96 64 160 128 96 192" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     default:
-      return `<svg width="24" height="24" viewBox="0 0 256 256" fill="none"><rect width="256" height="256" rx="48" fill="rgba(255,255,255,0.1)"/><path d="M128 48v160M48 128h160" stroke="white" stroke-width="12" stroke-linecap="round" fill="none"/></svg>`;
+      return `<svg width="20" height="20" viewBox="0 0 256 256" fill="none"><path d="M128 48v160M48 128h160" stroke="currentColor" stroke-width="16" stroke-linecap="round"/></svg>`;
   }
 }
 
@@ -52,122 +97,113 @@ export function generateOGImage(options: OGOptions): string {
   const escapedTitle = escapeXml(title);
   const escapedDesc = description ? escapeXml(description) : "";
 
-  const typeColors: Record<string, { badge: string; accent: string }> = {
-    Blog: { badge: "#3b82f6", accent: "#60a5fa" },
-    Link: { badge: "#8b5cf6", accent: "#a78bfa" },
-    Prompt: { badge: "#10b981", accent: "#34d399" },
-    Home: { badge: "#f59e0b", accent: "#fbbf24" },
+  let maxChars = 28;
+  let titleFontSize = 72;
+  let lineHeight = 88;
+
+  if (title.length > 50) {
+    maxChars = 38;
+    titleFontSize = 54;
+    lineHeight = 68;
+  }
+
+  const wrappedTitle = wrapText(escapedTitle, maxChars);
+  const titleLines = wrappedTitle.split("\n").slice(0, 4);
+
+  const titleY = titleLines.length >= 3 ? 200 : 250;
+
+  const typeColors: Record<string, string> = {
+    Blog: "#60a5fa",
+    Link: "#a78bfa",
+    Prompt: "#34d399",
+    Home: "#fbbf24",
   };
+  const accent = typeColors[type] || "#ffffff";
 
-  const { badge, accent } = typeColors[type];
-
-  // Wrap title to fit within ~25 chars per line max for OG image
-  const wrappedTitle = wrapText(escapedTitle, 28);
-  const titleLines = wrappedTitle.split("\n");
-  const titleFontSize = titleLines.length <= 2 ? 56 : 48;
-
+  // Use string interpolation properly, escaping any SVG backticks or dollars that aren't variables
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
-    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0a0a0f"/>
-      <stop offset="50%" stop-color="#0f0f1a"/>
-      <stop offset="100%" stop-color="#14142a"/>
-    </linearGradient>
-    <linearGradient id="glow1" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="${badge}" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="${accent}" stop-opacity="0.05"/>
-    </linearGradient>
-    <linearGradient id="glow2" x1="1" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="${accent}" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="${badge}" stop-opacity="0.02"/>
-    </linearGradient>
-    <linearGradient id="accentLine" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="${badge}"/>
-      <stop offset="100%" stop-color="${accent}"/>
-    </linearGradient>
-    <clipPath id="rounded">
-      <rect width="1200" height="630" rx="0"/>
-    </clipPath>
-    <filter id="noise">
-      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
-      <feColorMatrix type="saturate" values="0"/>
-      <feComponentTransfer>
-        <feFuncA type="linear" slope="0.04"/>
-      </feComponentTransfer>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="100" />
     </filter>
+    <pattern id="dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="rgba(255,255,255,0.12)" />
+    </pattern>
+    <linearGradient id="glassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.08)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0.02)" />
+    </linearGradient>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#E4E4E7" />
+    </linearGradient>
   </defs>
 
-  <g clip-path="url(#rounded)">
-    <!-- Background -->
-    <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <!-- Base dark background -->
+  <rect width="1200" height="630" fill="#09090b" />
 
-    <!-- Noise overlay -->
-    <rect width="1200" height="630" filter="url(#noise)" opacity="0.5"/>
+  <!-- Colorful blurred blobs -->
+  ${getDynamicBlobs(title)}
 
-    <!-- Glow orbs -->
-    <circle cx="200" cy="200" r="300" fill="url(#glow1)"/>
-    <circle cx="1000" cy="450" r="250" fill="url(#glow2)"/>
+  <!-- Dot pattern overlay -->
+  <rect width="1200" height="630" fill="url(#dots)" />
 
-    <!-- Grid pattern -->
-    <g stroke="rgba(255,255,255,0.03)" stroke-width="1" fill="none">
-      ${Array.from({ length: 13 }, (_, i) => `<line x1="0" y1="${i * 52.5}" x2="1200" y2="${i * 52.5}"/>`).join("\n      ")}
-      ${Array.from({ length: 25 }, (_, i) => `<line x1="${i * 50}" y1="0" x2="${i * 50}" y2="630"/>`).join("\n      ")}
+  <!-- Main Glass Card -->
+  <g>
+    <!-- Dark semi-transparent base for readability -->
+    <rect x="60" y="60" width="1080" height="510" rx="32" fill="rgba(9, 9, 11, 0.65)" />
+    <!-- Glass sheen -->
+    <rect x="60" y="60" width="1080" height="510" rx="32" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+    
+    <!-- Accent Top Line -->
+    <rect x="110" y="60" width="120" height="3" fill="${accent}" />
+    
+    <!-- Header / Type Badge -->
+    <g transform="translate(120, 120)">
+      <rect x="0" y="0" width="130" height="36" rx="18" fill="${accent}" fill-opacity="0.15" stroke="${accent}" stroke-opacity="0.3" stroke-width="1" />
+      <g transform="translate(14, 8)" color="${accent}">${getTypeIcon(type)}</g>
+      <text x="42" y="24" font-family="${FONT_STACK}" font-size="15" font-weight="600" fill="${accent}" letter-spacing="1.5">${type.toUpperCase()}</text>
     </g>
 
-    <!-- Accent line top -->
-    <rect x="0" y="0" width="1200" height="4" fill="url(#accentLine)"/>
-
-    <!-- Type badge -->
-    <g transform="translate(48, 48)">
-      <rect x="0" y="0" width="176" height="48" rx="24" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-      <g transform="translate(14, 12)">${getTypeIcon(type)}</g>
-      <text x="48" y="31" font-family="${FONT_STACK}" font-size="18" font-weight="600" fill="white">${type}</text>
-    </g>
-
-    <!-- Site name -->
-    <text x="1104" y="78" font-family="${FONT_STACK}" font-size="16" font-weight="500" fill="rgba(255,255,255,0.4)" text-anchor="end">SpreadSheets600</text>
+    <!-- Site Branding -->
+    <text x="1020" y="142" font-family="${FONT_STACK}" font-size="20" font-weight="600" fill="rgba(255,255,255,0.4)" text-anchor="end" letter-spacing="1">SpreadSheets600</text>
 
     <!-- Title -->
-    <g transform="translate(80, 240)">
+    <g transform="translate(120, ${titleY})">
       ${titleLines
         .map(
           (line, i) =>
-            `<text x="0" y="${i * (titleFontSize + 8)}" font-family="${FONT_STACK}" font-size="${titleFontSize}" font-weight="700" fill="white">${line}</text>`,
+            `<text x="0" y="${i * lineHeight}" font-family="${FONT_STACK}" font-size="${titleFontSize}" font-weight="800" fill="url(#textGradient)" letter-spacing="-0.02em">${line}</text>`
         )
-        .join("\n      ")}
+        .join("\\n      ")}
     </g>
 
-    <!-- Description if present -->
+    <!-- Description (Home only usually) -->
     ${
       escapedDesc && type === "Home"
-        ? `<text x="80" y="400" font-family="${FONT_STACK}" font-size="22" font-weight="400" fill="rgba(255,255,255,0.6)" width="1040">${wrapText(escapedDesc, 80).split("\n")[0]}</text>`
+        ? `<text x="120" y="${titleY + titleLines.length * lineHeight + 10}" font-family="${FONT_STACK}" font-size="28" font-weight="400" fill="rgba(255,255,255,0.6)" width="840">${wrapText(escapedDesc, 70).split("\\n")[0]}</text>`
         : ""
     }
 
     <!-- Tags -->
     ${
       tags.length > 0
-        ? `<g transform="translate(80, ${Math.max(380, 240 + titleLines.length * (titleFontSize + 8) + 40)})">
+        ? `<g transform="translate(120, 480)">
         ${tags
-          .slice(0, 4)
+          .slice(0, 5)
           .map((tag, i) => {
-            const tagW = tag.length * 12 + 32;
-            const xPos = i > 0 ? tags.slice(0, i).reduce((sum, t) => sum + t.length * 12 + 32 + 10, 0) : 0;
+            const tagW = tag.length * 10 + 32;
+            const xPos = i > 0 ? tags.slice(0, i).reduce((sum, t) => sum + t.length * 10 + 32 + 16, 0) : 0;
             return `
           <g transform="translate(${xPos}, 0)">
-            <rect x="0" y="0" width="${tagW}" height="34" rx="17" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-            <text x="${tagW / 2}" y="23" font-family="${FONT_STACK}" font-size="15" font-weight="500" fill="rgba(255,255,255,0.85)" text-anchor="middle">${escapeXml(tag)}</text>
+            <rect x="0" y="0" width="${tagW}" height="32" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <text x="${tagW / 2}" y="21" font-family="${FONT_STACK}" font-size="14" font-weight="500" fill="rgba(255,255,255,0.7)" text-anchor="middle">${escapeXml(tag)}</text>
           </g>`;
           })
           .join("")}
       </g>`
         : ""
     }
-
-    <!-- Decorative bottom accent -->
-    <rect x="48" y="570" width="200" height="2" rx="1" fill="rgba(255,255,255,0.08)"/>
-    <circle cx="268" cy="571" r="3" fill="rgba(255,255,255,0.12)"/>
-    <circle cx="280" cy="571" r="2" fill="rgba(255,255,255,0.06)"/>
   </g>
 </svg>`;
 }
