@@ -29,7 +29,10 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/astro-micro.jpg" } = Astro.props;
+const { title, description, image } = Astro.props;
+const ogImage = image || "/og.svg";
+const ogImageUrl = new URL(ogImage, Astro.url);
+const siteName = "SpreadSheets600";
 ---
 
 <!-- Global Metadata -->
@@ -47,18 +50,28 @@ const { title, description, image = "/astro-micro.jpg" } = Astro.props;
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content="article" />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={title} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="en_US" />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta property="twitter:image" content={ogImageUrl} />
+<meta property="twitter:site" content={siteName} />
+
+<!-- Additional Meta for rich embeds -->
+<meta name="theme-color" content="#0a0a0f" />
+<link rel="image_src" href={ogImageUrl} />
 
 <!-- PageFind -->
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
