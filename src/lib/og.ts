@@ -178,13 +178,6 @@ export function generateOGImage(options: OGOptions): string {
         .join("\\n      ")}
     </g>
 
-    <!-- Description (Home only usually) -->
-    ${
-      escapedDesc && type === "Home"
-        ? `<text x="120" y="${titleY + titleLines.length * lineHeight + 10}" font-family="${FONT_STACK}" font-size="28" font-weight="400" fill="rgba(255,255,255,0.6)" width="840">${wrapText(escapedDesc, 70).split("\\n")[0]}</text>`
-        : ""
-    }
-
     <!-- Tags -->
     ${
       tags.length > 0

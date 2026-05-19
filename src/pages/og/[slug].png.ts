@@ -8,7 +8,6 @@ type OGProps = {
   title: string;
   type: "Blog" | "Link" | "Prompt" | "Home";
   tags: string[];
-  description?: string;
 };
 
 export const getStaticPaths = (async () => {
@@ -55,7 +54,6 @@ export const getStaticPaths = (async () => {
     params: { slug: "home" },
     props: {
       title: SITE.TITLE,
-      description: SITE.DESCRIPTION,
       type: "Home" as const,
       tags: [],
     } satisfies OGProps,
@@ -65,9 +63,9 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 export const GET: APIRoute<OGProps> = async ({ props }) => {
-  const { title, type, tags, description } = props;
+  const { title, type, tags } = props;
 
-  const svg = generateOGImage({ title, type, tags, description });
+  const svg = generateOGImage({ title, type, tags });
 
   const png = await sharp(Buffer.from(svg)).png().toBuffer();
 
