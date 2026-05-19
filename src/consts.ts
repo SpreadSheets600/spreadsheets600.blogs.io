@@ -30,20 +30,16 @@ export const PROMPTS: Metadata = {
 
 export const SOCIALS: Socials = [
   {
-    NAME: "GitHub",
-    HREF: "https://github.com/SpreadSheets600",
-  },
-  {
     NAME: "LinkedIn",
-    HREF: "https://linkedin.com/in/soham-maity",
+    HREF: "https://linkedin.com/in/SpreadSheets600",
   },
   {
     NAME: "Instagram",
-    HREF: "https://instagram.com/spreadheets600",
+    HREF: "https://instagram.com/SpreadSheets600",
   },
   {
-    NAME: "X (formerly Twitter)",
-    HREF: "https://twitter.com/SheetsSpread600",
+    NAME: "X",
+    HREF: "https://twitter.com/SpreadSheets600",
   },
 ];
 
