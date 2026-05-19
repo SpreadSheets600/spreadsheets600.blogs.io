@@ -3,7 +3,9 @@ title: The Day Prompt Engineering Finally Clicked
 description: For the past few days, I experimented heavily with AI agents while working on Novatra and ended up learning something surprisingly obvious AI is only as good as the instructions you give it. By breaking problems into focused micro tasks and treating agents like new developers on a codebase, I got faster, cleaner, and far more reliable results.
 date: 2026-02-01T21:00:00
 draft: false
-tags: []
+tags:
+  - Tech
+  - AI
 ---
 
 **For the past two days, I haven’t really been doing much regarding my academics,** but I worked quite a bit with AI and agentic tools. It helped me learn a really important lesson: AI agents are really good _only_ if you can use them properly. The better the prompt and instructions you give, the better the results you will get.
