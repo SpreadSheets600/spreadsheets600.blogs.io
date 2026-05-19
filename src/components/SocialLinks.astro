@@ -1,0 +1,56 @@
+---
+import { SOCIALS } from "@consts";
+
+const iconMap: Record<string, string> = {
+  X: "ph-twitter-logo",
+  GitHub: "ph-github-logo",
+  Website: "ph-globe",
+  LinkedIn: "ph-linkedin-logo",
+  Instagram: "ph-instagram-logo",
+  Email: "ph-envelope",
+};
+
+const colorMap: Record<string, string> = {
+  X: "text-sky-400",
+  GitHub: "text-white",
+  Website: "text-emerald-400",
+  LinkedIn: "text-blue-400",
+  Instagram: "text-pink-400",
+  Email: "text-red-400",
+};
+---
+
+<div class="mb-8 sm:mb-12">
+  <h2
+    class="mb-4 flex items-center gap-2 text-xl font-bold text-white/90 sm:mb-6 sm:text-2xl"
+  >
+    <i class="ph ph-link text-2xl text-blue-400"></i>
+    Social Links
+  </h2>
+  <div class="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+    {
+      SOCIALS.map((link) => (
+        <a
+          href={link.HREF}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-3 rounded-xl border border-white/20 bg-white/5 p-3 transition hover:border-white/30 hover:bg-white/10 sm:gap-4 sm:p-4"
+        >
+          <div class="flex size-8 flex-shrink-0 items-center justify-center rounded-lg bg-white/10 sm:size-10">
+            <i
+              class={`ph ${iconMap[link.NAME] || "ph-link"} ${colorMap[link.NAME] || "text-white"} text-base sm:text-lg`}
+            />
+          </div>
+          <div class="min-w-0 flex-1">
+            <h3 class="truncate text-sm font-semibold text-white sm:text-base">
+              {link.NAME}
+            </h3>
+            <p class="truncate text-xs text-white/60 sm:text-sm">
+              {link.HREF.replace(/^https?:\/\/(www\.)?/, "")}
+            </p>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</div>

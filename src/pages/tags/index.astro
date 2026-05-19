@@ -10,13 +10,23 @@ const tags = [...new Set(posts.flatMap((post) => post.data.tags || []))].sort();
 <Layout title="Tags" description="List of tags used.">
   <Container>
     <div class="space-y-10">
-      <h1 class="animate font-semibold">All Tags</h1>
+      <header class="animate">
+        <div class="flex items-center gap-3">
+          <div
+            class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white"
+          >
+            <i class="ph-light ph-tag text-2xl"></i>
+          </div>
+          <h1 class="text-3xl font-bold text-white">Tags</h1>
+        </div>
+      </header>
+
       <div class="animate flex flex-wrap gap-2">
         {
           tags.map((tag) => (
             <a
               href={`/tags/${tag}`}
-              class="inline-flex items-center gap-1 rounded-lg bg-black/5 dark:bg-white/15 px-3 py-1.5 text-sm font-medium text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition"
+              class="inline-flex items-center gap-1 rounded-lg bg-black/5 px-3 py-1.5 text-sm font-medium text-black transition hover:bg-black/10 dark:bg-white/15 dark:text-white dark:hover:bg-white/20"
             >
               {tag}{" "}
               <span class="text-xs text-black/60 dark:text-white/60">

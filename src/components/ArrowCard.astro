@@ -2,30 +2,40 @@
 import type { CollectionEntry } from "astro:content";
 
 type Props = {
-  entry: CollectionEntry<"blog"> | CollectionEntry<"links"> | CollectionEntry<"prompts">;
+  entry:
+    | CollectionEntry<"blog">
+    | CollectionEntry<"links">
+    | CollectionEntry<"prompts">;
 };
 
 const { entry } = Astro.props as {
-  entry: CollectionEntry<"blog"> | CollectionEntry<"links"> | CollectionEntry<"prompts">;
+  entry:
+    | CollectionEntry<"blog">
+    | CollectionEntry<"links">
+    | CollectionEntry<"prompts">;
 };
 
-const href = entry.collection === 'links' && entry.data.url ? entry.data.url : `/${entry.collection}/${entry.id}`;
+const href =
+  entry.collection === "links" && entry.data.url
+    ? entry.data.url
+    : `/${entry.collection}/${entry.id}`;
 ---
 
 <a
   href={href}
-  target={entry.collection === 'links' ? "_blank" : "_self"}
-  rel={entry.collection === 'links' ? "noopener noreferrer" : ""}
-  class="group card-shell flex flex-nowrap items-center px-4 py-4 pr-10 hover:-translate-y-1 hover:bg-black/50 relative"
+  target={entry.collection === "links" ? "_blank" : "_self"}
+  rel={entry.collection === "links" ? "noopener noreferrer" : ""}
+  class="group card-shell relative flex flex-nowrap items-center px-4 py-4 pr-10 hover:-translate-y-1 hover:bg-black/50"
 >
   <div class="flex flex-1 flex-col truncate">
-    <div class="font-semibold text-base sm:text-lg text-black dark:text-white">
+    <div class="text-base font-semibold text-black sm:text-lg dark:text-white">
       {entry.data.title}
     </div>
-    <div class="text-xs sm:text-sm text-black/75 dark:text-white/75 truncate">
+    <div class="truncate text-xs text-black/75 sm:text-sm dark:text-white/75">
       {entry.data.description}
     </div>
   </div>
-  <i class="ph ph-arrow-right absolute right-4 top-1/2 -translate-y-1/2 -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 text-xl text-black dark:text-white"></i>
+  <i
+    class="ph ph-arrow-right absolute top-1/2 right-4 -translate-x-2 -translate-y-1/2 text-xl text-black opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 dark:text-white"
+  ></i>
 </a>
-

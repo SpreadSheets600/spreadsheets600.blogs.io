@@ -2,6 +2,9 @@ backend:
   name: github
   repo: SpreadSheets600/spreadsheets600.blogs.io
   branch: main
+  
+  base_url: https://sveltia-cms-auth.spreadsheets600.workers.dev
+  auth_endpoint: /auth
 
 media_folder: "public"
 public_folder: "/"

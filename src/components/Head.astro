@@ -216,7 +216,9 @@ const { title, description, image = "/astro-micro.jpg" } = Astro.props;
     async function copyCode(codeBlock, copyButton) {
       // Find the code element to get text without the button's text
       const codeElement = codeBlock.querySelector("code");
-      const textToCopy = codeElement ? codeElement.innerText : codeBlock.innerText.replace(copyButton.innerText, "");
+      const textToCopy = codeElement
+        ? codeElement.innerText
+        : codeBlock.innerText.replace(copyButton.innerText, "");
 
       await navigator.clipboard.writeText(textToCopy);
       copyButton.innerHTML = checkIcon;
@@ -232,7 +234,8 @@ const { title, description, image = "/astro-micro.jpg" } = Astro.props;
 
       const copyButton = document.createElement("button");
       copyButton.innerHTML = copyButtonIcon;
-      copyButton.classList = "copy-code flex items-center justify-center text-lg";
+      copyButton.classList =
+        "copy-code flex items-center justify-center text-lg";
 
       codeBlock.setAttribute("tabindex", "0");
       codeBlock.appendChild(copyButton);

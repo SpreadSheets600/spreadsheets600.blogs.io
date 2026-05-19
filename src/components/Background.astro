@@ -1,7 +1,8 @@
 ---
+
 ---
 
-<div class="background-container">
+<div class="background-container" transition:persist>
     <div class="background-image" id="bg-image"></div>
     <div class="background-overlay"></div>
 </div>
@@ -15,12 +16,22 @@
         "https://raw.githubusercontent.com/SpreadSheets600/spreadsheets600.github.io/refs/heads/main/public/5.jpg",
     ];
 
-    const bgElement = document.getElementById("bg-image");
-    if (bgElement) {
-        const randomIndex = Math.floor(Math.random() * backgroundImages.length);
-        const selectedImage = backgroundImages[randomIndex];
-        bgElement.style.backgroundImage = `url(${selectedImage})`;
+    function setupBackground() {
+        const bgElement = document.getElementById("bg-image");
+        if (bgElement && !bgElement.style.backgroundImage) {
+            const randomIndex = Math.floor(
+                Math.random() * backgroundImages.length,
+            );
+            const selectedImage = backgroundImages[randomIndex];
+            bgElement.style.backgroundImage = `url(${selectedImage})`;
+        }
     }
+
+    // Initialize on first load
+    setupBackground();
+
+    // Re-initialize after view transition swap
+    document.addEventListener("astro:after-swap", setupBackground);
 </script>
 
 <style>
@@ -53,6 +64,12 @@
         width: 100%;
         height: 100%;
         backdrop-filter: blur(5px);
-        background: radial-gradient(60% 60% at 50% 10%, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.08)), rgba(0, 0, 0, 0.8);
+        background:
+            radial-gradient(
+                60% 60% at 50% 10%,
+                rgba(0, 0, 0, 0.08),
+                rgba(0, 0, 0, 0.08)
+            ),
+            rgba(0, 0, 0, 0.8);
     }
 </style>

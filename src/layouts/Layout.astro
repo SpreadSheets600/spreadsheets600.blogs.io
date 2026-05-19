@@ -5,7 +5,6 @@ import Footer from "@components/Footer.astro";
 import Pagefind from "@components/PageFind.astro";
 import Background from "@components/Background.astro";
 import { SITE } from "@consts";
-import "../styles/global.css";
 
 type Props = {
   title: string;
@@ -19,30 +18,50 @@ const { title, description } = Astro.props;
 <html lang="en" class="dark">
   <head>
     <Head title={`${title} | ${SITE.TITLE}`} description={description} />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css"
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.10/dist/basecoat.cdn.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.10/dist/basecoat.cdn.min.css"
+    />
 
-    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.10/dist/js/all.min.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.10/dist/js/all.min.js"
+      defer></script>
   </head>
-  <body class="min-h-screen relative font-sans antialiased flex flex-col">
+  <body class="relative flex min-h-screen flex-col font-sans antialiased">
     <noscript>
       <style>
-        .animate{
-          opacity:1;
+        .animate {
+          opacity: 1;
           translate: var(--tw-translate-x) calc(var(--spacing) * 0);
         }
       </style>
     </noscript>
     <Background />
-    <div class="app-container min-h-screen flex flex-col w-full">
+    <div class="app-container flex min-h-screen w-full flex-col">
       <Header />
-      <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+      <main class="mx-auto w-full max-w-7xl flex-1 px-4 py-32 sm:px-6 lg:px-8">
         <slot />
       </main>
       <Footer />
@@ -50,4 +69,3 @@ const { title, description } = Astro.props;
     <Pagefind />
   </body>
 </html>
-

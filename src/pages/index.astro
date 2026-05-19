@@ -1,9 +1,10 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
-import { SITE, HOME, SOCIALS } from "@consts";
+import { SITE, HOME } from "@consts";
 import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
+import SocialLinks from "@components/SocialLinks.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
@@ -29,116 +30,97 @@ const prompts: CollectionEntry<"prompts">[] = (
 
 <Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <aside data-pagefind-ignore>
-      <h1 class="font-semibold text-black dark:text-white flex items-center gap-2">
-        SpreadSheets600 <i class="ph ph-flask text-2xl"></i>
-      </h1>
-      <div class="space-y-16">
-        <section>
-          <article class="space-y-4">
-            <span>
+    <div class="space-y-16" data-pagefind-ignore>
+      <section class="animate">
+        <div id="about" class="card-shell-lg card-pad">
+          <header class="mb-4 sm:mb-5">
+            <h1 class="text-2xl font-bold text-white sm:text-3xl flex items-center gap-2">
+              {SITE.TITLE} <i class="ph ph-flask text-2xl"></i>
+            </h1>
+          </header>
+
+          <section class="space-y-4 text-base leading-relaxed text-white/80 sm:text-lg">
+            <article class="space-y-4">
               <p>
-                Welcome to my personal site. It is built with <Link
-                  href="https://astro.build/">Astro</Link
-                > and styled to match my portfolio theme.
+                Welcome to my blog &mdash; a place where I write about whatever&rsquo;s on my mind. <strong class="text-white">Linux</strong>, <strong class="text-white">coding</strong>, <strong class="text-white">gaming</strong>, <strong class="text-white">anime</strong>, personal stories &mdash; if it interests me, it&rsquo;ll end up here.
               </p>
               <p>
-                I use this space for <Link href="/blog">blogs</Link>, sharing useful <Link href="/links">links</Link>, and saving <Link href="/prompts">prompts</Link>.
+                This is my dedicated blog site. If you&rsquo;re looking for my portfolio, head over to <Link href="https://spreadsheets600.buzz" external>spreadsheets600.buzz</Link>.
               </p>
-            </span>
-          </article>
-        </section>
+              <p>
+                I use this space for <Link href="/blog">blog posts</Link>, sharing useful <Link href="/links">links</Link>, and saving <Link href="/prompts">prompts</Link>.
+              </p>
+            </article>
+          </section>
+        </div>
+      </section>
 
-        <section class="animate space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-y-2">
-            <h2 class="font-semibold text-black dark:text-white">
-              Latest posts
-            </h2>
-            <Link href="/blog"> See all posts </Link>
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-y-2">
+          <div class="flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white">
+              <i class="ph-light ph-newspaper text-2xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-white">Latest Posts</h2>
           </div>
-          <ul class="not-prose flex flex-col gap-4">
-            {
-              blog.map((post) => (
-                <li>
-                  <ArrowCard entry={post} />
-                </li>
-              ))
-            }
-          </ul>
-        </section>
+          <Link href="/blog"> See all posts </Link>
+        </div>
+        <ul class="not-prose flex flex-col gap-4">
+          {
+            blog.map((post) => (
+              <li>
+                <ArrowCard entry={post} />
+              </li>
+            ))
+          }
+        </ul>
+      </section>
 
-        <section class="animate space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-y-2">
-            <h2 class="font-semibold text-black dark:text-white">
-              Recent links
-            </h2>
-            <Link href="/links"> See all links </Link>
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-y-2">
+          <div class="flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white">
+              <i class="ph-light ph-link text-2xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-white">Recent Links</h2>
           </div>
-          <ul class="not-prose flex flex-col gap-4">
-            {
-              links.map((link) => (
-                <li>
-                  <ArrowCard entry={link} />
-                </li>
-              ))
-            }
-          </ul>
-        </section>
+          <Link href="/links"> See all links </Link>
+        </div>
+        <ul class="not-prose flex flex-col gap-4">
+          {
+            links.map((link) => (
+              <li>
+                <ArrowCard entry={link} />
+              </li>
+            ))
+          }
+        </ul>
+      </section>
 
-        <section class="animate space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-y-2">
-            <h2 class="font-semibold text-black dark:text-white">
-              Recent prompts
-            </h2>
-            <Link href="/prompts"> See all prompts </Link>
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-y-2">
+          <div class="flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white">
+              <i class="ph-light ph-terminal-window text-2xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-white">Recent Prompts</h2>
           </div>
-          <ul class="not-prose flex flex-col gap-4">
-            {
-              prompts.map((prompt) => (
-                <li>
-                  <ArrowCard entry={prompt} />
-                </li>
-              ))
-            }
-          </ul>
-        </section>
+          <Link href="/prompts"> See all prompts </Link>
+        </div>
+        <ul class="not-prose flex flex-col gap-4">
+          {
+            prompts.map((prompt) => (
+              <li>
+                <ArrowCard entry={prompt} />
+              </li>
+            ))
+          }
+        </ul>
+      </section>
 
-        <section class="animate space-y-4">
-          <h2 class="font-semibold text-black dark:text-white">
-            Let's Connect
-          </h2>
-          <article>
-            <p>
-              If you want to get in touch with me about something or just to say
-              hi, reach out on social media or send me an email.
-            </p>
-          </article>
-          <ul class="not-prose flex flex-wrap gap-2">
-            {
-              SOCIALS.map((SOCIAL) => (
-                <li class="flex gap-x-2 text-nowrap">
-                  <Link
-                    href={SOCIAL.HREF}
-                    external
-                    aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
-                  >
-                    {SOCIAL.NAME}
-                  </Link>
-                  {"/"}
-                </li>
-              ))
-            }
-            <li class="line-clamp-1">
-              <Link
-                href={`mailto:${SITE.EMAIL}`}
-                aria-label={`Email ${SITE.TITLE}`}
-              >
-                {SITE.EMAIL}
-              </Link>
-            </li>
-          </ul>
-        </section>
-      </div>
-    </aside>
+      <section class="animate">
+        <SocialLinks />
+      </section>
+    </div>
   </Container>
 </Layout>

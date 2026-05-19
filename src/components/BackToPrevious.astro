@@ -8,11 +8,11 @@ const { href } = Astro.props;
 
 <a
   href={href}
-  class="inline-flex items-center gap-1 rounded-lg bg-black/5 dark:bg-white/15 px-3 py-1.5 text-sm font-medium text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition group"
+  class="group inline-flex items-center gap-1 rounded-lg bg-black/5 px-3 py-1.5 text-sm font-medium text-black transition hover:bg-black/10 dark:bg-white/15 dark:text-white dark:hover:bg-white/20"
 >
-  <i class="ph ph-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+  <i class="ph ph-arrow-left transition-transform group-hover:-translate-x-1"
+  ></i>
   <div class="text-sm">
     <slot />
   </div>
 </a>
-

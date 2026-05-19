@@ -1,14 +1,14 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@plugin '@tailwindcss/typography';
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: 'Poppins', Geist Sans, ui-sans-serif, system-ui, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-sans: "Poppins", Geist Sans, ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-mono: Geist Mono, ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, 'Liberation Mono', 'Courier New', monospace;
+    Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 /*
@@ -29,48 +29,47 @@
   }
 }
 
-@layer utilities {
-  html {
-    overflow-y: auto;
-    color-scheme: light;
-    scroll-padding-top: 100px;
-  }
+html {
+  overflow-y: auto;
+  color-scheme: light;
+  scroll-padding-top: 100px;
+}
 
-  html.dark {
-    color-scheme: dark;
-  }
+html.dark {
+  color-scheme: dark;
+}
 
-  html,
-  body {
-    @apply size-full;
-  }
+html,
+body {
+  @apply size-full;
+}
 
-  body {
-    @apply font-sans antialiased;
-    @apply flex flex-col;
-    @apply bg-neutral-100 dark:bg-transparent;
-    @apply text-black/75 dark:text-white/75;
-  }
+body {
+  @apply font-sans antialiased;
+  @apply flex flex-col;
+  @apply bg-neutral-100 dark:bg-transparent;
+  @apply text-black/75 dark:text-white/75;
+}
 
-  header {
-    @apply fixed left-0 right-0 top-0 z-50 py-6;
-    @apply bg-neutral-100/75 dark:bg-transparent;
-    @apply saturate-200 backdrop-blur-xs;
-  }
+header {
+  @apply saturate-200;
+}
 
-  main {
-    @apply flex-1 py-32;
-  }
+main {
+  @apply flex-1 py-16 sm:py-32;
+}
 
-  footer {
-    @apply py-6 text-sm;
-  }
+footer {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
 
-  article {
-    @apply prose prose-neutral max-w-full dark:prose-invert prose-img:mx-auto prose-img:my-auto;
-    @apply prose-headings:font-semibold;
-    @apply prose-headings:text-black dark:prose-headings:text-white;
-  }
+article {
+  @apply prose prose-neutral max-w-full dark:prose-invert prose-img:mx-auto prose-img:my-auto;
+  @apply prose-headings:font-semibold;
+  @apply prose-headings:text-black dark:prose-headings:text-white;
 }
 
 @layer utilities {
