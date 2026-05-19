@@ -3,7 +3,8 @@ title: Disappointment  A Temporary Detour?
 description: I personally believe in the saying, "Disappointment is a temporary detour on the road to success," but this time, it feels like more than just a detour. Over the past two years, I've felt like everything has fallen apart. My studies, my life, my love, my passion — everything seemed to collapse, do well in entrance exams, and ace my board exams. Now, it feels like I'm back at square one.
 date: 2024-06-30T20:00:00
 draft: false
-tags: []
+tags:
+  - Life
 ---
 
 I personally believe in the saying, "Disappointment is a temporary detour on the road to success," but this time, it feels like more than just a detour. Over the past two years, I've felt like everything has fallen apart. My studies, my life, my love, my passion — everything seemed to collapse, do well in entrance exams, and ace my board exams. Now, it feels like I'm back at square one.
