@@ -1,8 +1,8 @@
 import type { Metadata, Site, Socials } from "@types";
 
 export const SITE: Site = {
-  TITLE: "SpreadSheets600",
-  DESCRIPTION: "SpreadSheets600 is a personal blog and collection of digital resources.",
+  TITLE: "SpreadSheets600 - Personal Blog, Tech & Resources",
+  DESCRIPTION: "SpreadSheets600 is a personal blog exploring Linux, coding, gaming, anime, and creative tech. Discover articles, curated links, and useful AI prompts from a passionate developer.",
   EMAIL: "sohammaity239@gmail.com",
   NUM_POSTS_ON_HOMEPAGE: 5,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
@@ -10,7 +10,7 @@ export const SITE: Site = {
 
 export const HOME: Metadata = {
   TITLE: "Home",
-  DESCRIPTION: "Welcome to SpreadSheets600 - personal blog and resources.",
+  DESCRIPTION: "Welcome to SpreadSheets600 — a personal blog by a developer exploring Linux, coding, gaming, anime, and tech creativity. Dive into articles, curated links, and AI prompts.",
 };
 
 export const BLOG: Metadata = {

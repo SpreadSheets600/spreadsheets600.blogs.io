@@ -8,7 +8,7 @@ import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://astro-micro.vercel.app",
+  site: "http://blogs.spreadsheets600.buzz",
   integrations: [sitemap(), mdx(), pagefind()],
 
   vite: {
