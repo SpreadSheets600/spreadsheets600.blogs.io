@@ -3,7 +3,8 @@ title: Unfinished Grief
 description: A messy stretch of exams, gaming, drifting, and slowly finding direction again somehow turned into an emotional spiral after watching Nana. What started as a casual anime became a painfully real story about love, loneliness, broken people, and the quiet ways life pulls people apart.
 date: 2026-04-29T20:00:00
 draft: false
-tags: []
+tags:
+  - Anime
 ---
 
 Last time I opened these pages feels distant now, so far back that I cannot even place when. That space between entries grew without me noticing. Recently, something shifted off-grid. Nothing dramatic, nothing loud, just this quiet imbalance. I cannot really name the cause, but there was confusion and no sense of direction. This keeps happening with me now and then.
