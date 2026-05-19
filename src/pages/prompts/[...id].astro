@@ -1,10 +1,9 @@
 ---
-import { type CollectionEntry, getCollection, render } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 import BackToPrevious from "@components/BackToPrevious.astro";
 import PostNavigation from "@components/PostNavigation.astro";
-import TableOfContents from "@components/TableOfContents.astro";
 import Giscus from "@components/Giscus.astro";
 
 export async function getStaticPaths() {
@@ -46,10 +45,9 @@ const nextPost = getNextPost();
 const prevPost = getPrevPost();
 
 const post = Astro.props;
-const { Content, headings } = await render(post);
 ---
 
-<Layout title={post.data.title} description={post.data.description}>
+<Layout title={post.data.title} description={post.data.description} image={`/prompts/${post.id}/og.svg`}>
   <Container>
     <div class="animate">
       <BackToPrevious href="/prompts">Back to prompts</BackToPrevious>
@@ -73,15 +71,40 @@ const { Content, headings } = await render(post);
         ) : null
       }
     </div>
-    {headings.length > 0 && <TableOfContents headings={headings} />}
-    <article class="animate">
-      <Content />
-      <div class="mt-24">
-        <PostNavigation prevPost={prevPost} nextPost={nextPost} />
-      </div>
-      <div class="mt-24">
-        <Giscus />
-      </div>
-    </article>
+    <div class="animate relative group">
+      <pre
+        class="overflow-x-auto rounded-xl border border-white/10 bg-black/40 p-6 text-sm leading-relaxed text-white/90 backdrop-blur-md"
+      ><code>{post.body}</code></pre>
+      <button
+        class="copy-btn absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white opacity-0 transition-all duration-200 hover:bg-white/10 group-hover:opacity-100"
+        data-copy={post.body}
+        aria-label="Copy prompt"
+      >
+        <i class="ph ph-copy"></i>
+      </button>
+    </div>
+    <div class="animate mt-24">
+      <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+    </div>
+    <div class="animate mt-24">
+      <Giscus />
+    </div>
   </Container>
 </Layout>
+
+<script>
+  document.querySelectorAll(".copy-btn").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const text = btn.getAttribute("data-copy");
+      if (!text) return;
+      await navigator.clipboard.writeText(text);
+      const icon = btn.querySelector("i");
+      if (icon) {
+        icon.className = "ph ph-check";
+        setTimeout(() => {
+          icon.className = "ph ph-copy";
+        }, 2000);
+      }
+    });
+  });
+</script>
