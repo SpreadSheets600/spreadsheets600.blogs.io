@@ -30,7 +30,7 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image } = Astro.props;
-const ogImage = image || "/og.svg";
+const ogImage = image || "/og/home.png";
 const ogImageUrl = new URL(ogImage, Astro.url);
 const siteName = "SpreadSheets600";
 ---

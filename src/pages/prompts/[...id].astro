@@ -47,7 +47,7 @@ const prevPost = getPrevPost();
 const post = Astro.props;
 ---
 
-<Layout title={post.data.title} description={post.data.description} image={`/prompts/${post.id}/og.svg`}>
+<Layout title={post.data.title} description={post.data.description} image={`/og/prompt--${post.id}.png`}>
   <Container>
     <div class="animate">
       <BackToPrevious href="/prompts">Back to prompts</BackToPrevious>
