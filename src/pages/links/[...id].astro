@@ -7,6 +7,8 @@ import PostNavigation from "@components/PostNavigation.astro";
 import TableOfContents from "@components/TableOfContents.astro";
 import Giscus from "@components/Giscus.astro";
 
+import { stripMarkdown, truncateText } from "@lib/utils";
+
 export async function getStaticPaths() {
   const posts = (await getCollection("links"))
     .filter((post) => !post.data.draft)
@@ -47,9 +49,10 @@ const prevPost = getPrevPost();
 
 const post = Astro.props;
 const { Content, headings } = await render(post);
+const description = post.data.description || truncateText(stripMarkdown(post.body || ""));
 ---
 
-<Layout title={post.data.title} description={post.data.description} image={`/og/link--${post.id}.png`}>
+<Layout title={post.data.title} description={description} image={`/og/link--${post.id}.png`}>
   <Container>
     <div class="animate">
       <BackToPrevious href="/links">Back to links</BackToPrevious>

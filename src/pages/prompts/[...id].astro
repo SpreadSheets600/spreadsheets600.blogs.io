@@ -6,6 +6,8 @@ import BackToPrevious from "@components/BackToPrevious.astro";
 import PostNavigation from "@components/PostNavigation.astro";
 import Giscus from "@components/Giscus.astro";
 
+import { stripMarkdown, truncateText } from "@lib/utils";
+
 export async function getStaticPaths() {
   const posts = (await getCollection("prompts"))
     .filter((post) => !post.data.draft)
@@ -45,9 +47,10 @@ const nextPost = getNextPost();
 const prevPost = getPrevPost();
 
 const post = Astro.props;
+const description = post.data.description || truncateText(stripMarkdown(post.body || ""));
 ---
 
-<Layout title={post.data.title} description={post.data.description} image={`/og/prompt--${post.id}.png`}>
+<Layout title={post.data.title} description={description} image={`/og/prompt--${post.id}.png`}>
   <Container>
     <div class="animate">
       <BackToPrevious href="/prompts">Back to prompts</BackToPrevious>

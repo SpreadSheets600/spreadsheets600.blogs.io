@@ -1,6 +1,7 @@
 import rss from "@astrojs/rss";
 import { SITE } from "@consts";
 import { getCollection } from "astro:content";
+import { stripMarkdown, truncateText } from "../lib/utils";
 
 export async function GET(context) {
   const blog = (await getCollection("blog")).filter((post) => !post.data.draft);
@@ -23,7 +24,7 @@ export async function GET(context) {
     site: context.site,
     items: items.map((item) => ({
       title: item.data.title,
-      description: item.data.description,
+      description: item.data.description || truncateText(stripMarkdown(item.body || "")),
       pubDate: item.data.date,
       link: `/${item.collection}/${item.id}/`,
     })),

@@ -3,7 +3,7 @@ import { type CollectionEntry, getCollection, render } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
-import { readingTime } from "@lib/utils";
+import { readingTime, stripMarkdown, truncateText } from "@lib/utils";
 import BackToPrevious from "@components/BackToPrevious.astro";
 import PostNavigation from "@components/PostNavigation.astro";
 import TableOfContents from "@components/TableOfContents.astro";
@@ -49,9 +49,10 @@ const prevPost = getPrevPost();
 
 const post = Astro.props;
 const { Content, headings } = await render(post);
+const description = post.data.description || truncateText(stripMarkdown(post.body || ""));
 ---
 
-<Layout title={post.data.title} description={post.data.description} image={`/og/blog--${post.id}.png`}>
+<Layout title={post.data.title} description={description} image={`/og/blog--${post.id}.png`}>
   <Container>
     <div class="animate">
       <BackToPrevious href="/blog">Back to blog</BackToPrevious>
