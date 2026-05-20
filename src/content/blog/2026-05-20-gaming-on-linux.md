@@ -190,7 +190,7 @@ Meaning: the game thinks it is talking to Windows. But underneath? Linux is tran
 
 ![Architecture of the WINE/native integration. | Download Scientific Diagram](/Architecture-of-the-WINE-native-integration.png)
 
-I bet you can't understand a single thing. Fun fact \~ I did not as well. YK this is just to look cool. Jokes apart, what this actually shows is the Windows app sitting at the top, screaming in Windows code. 
+I bet you can't understand a single thing. Fun fact \~ I did not as well. You know, this is just to look cool. Jokes apart, what this actually shows is the Windows app sitting at the top, screaming in Windows code. 
 
 The middle boxes like the WINE Server and NTDLL are the exhausted translators catching that screaming, frantically translating it, and handing it down to the Linux Kernel at the very bottom so your computer actually understands it. 
 
@@ -210,6 +210,10 @@ Before Proton, Linux gaming was honestly painful. Not impossible. Just painful. 
 And after all that? Maybe the game launches. _Maybe._ Then Valve Corporation decided \~
 
 _“Fine. We will fix this ourselves.”_
+
+![Steam Community :: :: Lord Gaben](/20260520-222837.png)
+
+_Hail Lord Gaben. The man who single handedly resurrected Linux gaming, and the only deity capable of making me buy 14 games I will never play just because they had a green -90% sticker next to them. Amen._
 
 And Proton happened. Honestly, Proton is probably one of the biggest reasons Linux gaming exploded so hard recently. Because Proton simplified everything. Now, instead of spending hours configuring Wine manually, you mostly:
 
