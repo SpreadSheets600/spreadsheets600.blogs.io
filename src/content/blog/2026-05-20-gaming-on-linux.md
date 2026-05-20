@@ -45,11 +45,11 @@ And Mint worked beautifully for that. Everything felt lighter. Faster. Cleaner. 
 
 ### I Finally Got My Laptop
 
-Now here comes the funny part. After using Mint for a pretty long time, I finally got my own gaming laptop. And yes. I am absolutely going to flex it a little bit. Not because it is some ultra NASA-tier machine or anything. But brother. 32 GB RAM in this RAM price crisis? I have to flex that at least once.
+Now here comes the funny part. After using Mint for a pretty long time, I finally got my own gaming laptop. And yes I am absolutely going to flex it a little bit. Not because it is some ultra NASA-tier machine or anything. But brother. 32 GB RAM in this RAM price crisis? I have to flex that at least once.
 
 Anyways.
 
-The laptop arrived with Windows 11 preinstalled, obviously. And honestly, at first, I stayed there. Mostly because:
+The laptop arrived with Windows 11 preinstalled, obviously. And honestly, at first, I stayed there. Mostly because \~
 
 1. Games Worked
 2. Anti-Cheats Worked
@@ -74,7 +74,7 @@ This time I chose Fedora. And Fedora honestly changed a lot for me. Because most
 
 _Sorry again, the only image I got for Fedora as well._ 
 
-Fedora felt modern. _Very_ modern. GNOME animations were smooth. Everything felt clean. The system felt engineered properly. But more importantly: I made gaming work. And this was the first time Linux gaming stopped feeling like some experimental side project and started feeling genuinely usable.
+Fedora felt modern. _Very_ modern. GNOME animations were smooth. Everything felt clean. The system felt engineered properly. But more importantly \~ I made gaming work. And this was the first time Linux gaming stopped feeling like some experimental side project and started feeling genuinely usable.
 
 Steam worked. Proton worked. Games launched. Performance was surprisingly solid.
 
@@ -111,7 +111,7 @@ And everywhere I looked, people kept shouting these names \~
 3. Nobara
 4. POP_OS!
 
-Honestly, all of these looked insanely good. But there was one thing I kept noticing: all roads somehow kept pointing toward Arch-based systems. Now, hearing "Arch" made me kind of fear it, because I'd heard people saying it was difficult to install and all that. But this time, I was confident enough to dive into the rabbit hole.
+Honestly, all of these looked insanely good. But there was one thing I kept noticing \~ all roads somehow kept pointing toward Arch-based systems. Now, hearing "Arch" made me kind of fear it, because I'd heard people saying it was difficult to install and all that. But this time, I was confident enough to dive into the rabbit hole.
 
 That is when I discovered CachyOS.
 
@@ -169,10 +169,6 @@ Suddenly \~ Workspaces behaved correctly, Layouts felt predictable, Dual monitor
 Honestly? I do not think I have ever felt more comfortable on a computer.
 
 I absolutely love the direction this is taking. You are taking something that is traditionally dry (translation layers and environment variables) and turning it into a chaotic, relatable story of survival. The transition from "I just want to play games" to "I am now an accidental compatibility engineer" is hilarious and painfully accurate for anyone who has stared at a Linux terminal at 2 AM trying to make a cutscene work.
-
-I fixed the typos (like "wuthering eaves" and "propiratory"), cleaned up your terminal commands so the syntax is actually correct (removed the stray dashes), and structured the different Proton versions so they hit like a character roster in a fighting game. I also kept the formatting raw, exactly as you prefer.
-
-Here is Part Two.
 
 ### Understanding Linux Gaming Properly
 
