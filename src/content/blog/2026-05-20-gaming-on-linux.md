@@ -17,7 +17,7 @@ Switching distros ... yeah, I keep changing operating systems. No, it is not a h
 
 _“Yep. Time to reinstall everything again.”_
 
-And honestly, this entire Linux journey did not even begin because I loved Linux. It began because my old laptop was dying. Not literally. But close enough. ( Okay, maybe a little literally—I broke my previous laptop by actually burning its motherboard, so this pass-down from my dad was a temporary solution. ) It was not exactly my first laptop, but it was the machine I spent most of my time on.
+And honestly, this entire Linux journey did not even begin because I loved Linux. It began because my old laptop was dying. Not literally. But close enough. ( Okay, maybe a little literally I broke my previous laptop by actually burning its motherboard, so this pass-down from my dad was a temporary solution. ) It was not exactly my first laptop, but it was the machine I spent most of my time on.
 
 And Windows on that thing was suffering. Every update somehow made things worse. RAM usage kept climbing. Boot times became miserable. Opening browsers felt heavy. Running programming tools together felt like the laptop was negotiating with God before doing anything.
 
@@ -252,31 +252,31 @@ No. Absolutely not. Upon Googling and Redditing a bit, suddenly I started seeing
 
 Turns out, different Proton builds exist for different goals. And honestly? This matters WAY more than beginners realize.
 
-**Mainline Proton — The Stable Controlled One**
+**Mainline Proton - The Stable Controlled One**
 
 This is the default Proton provided officially through Steam. It is tested, safe, and reliable. This is what most people should start with first. 
 
 The normal Proton versions are maintained directly by Valve and integrated tightly with Steam itself. Usually, if a game works perfectly already, stick to main Proton. ( Do not distro-hop Proton versions for no reason. That path leads to madness. )
 
-**Proton Experimental — The “We Need Fixes RIGHT NOW” Version**
+**Proton Experimental - The “We Need Fixes RIGHT NOW” Version**
 
 This one is basically the bleeding-edge branch. New fixes arrive here first. New game support arrives here first. Which also means... new bugs sometimes arrive here first, too. 
 
 Experimental is highly useful when a brand new game releases, a game recently broke, anti-cheat updates happen, or a specific fix has not reached stable Proton yet.
 
-**Proton GE — The Community Monster**
+**Proton GE - The Community Monster**
 
 Now THIS is where Linux gaming starts becoming truly beautiful. GE stands for GloriousEggroll (which still sounds like the greatest Linux username ever created). Proton GE is basically the community saying, _“What if we take Proton and aggressively make games work?”_ It includes extra video codecs, community patches, newer Wine builds, and game-specific workarounds. 
 
-Proton GE fixes an absurd number of annoying games—especially those cutscene issues, unsupported codecs, and anime/gacha game nonsense. ( Honestly, Proton GE is basically “Fine, I will fix it myself” in software form. )
+Proton GE fixes an absurd number of annoying games - especially those cutscene issues, unsupported codecs, and anime/gacha game nonsense. ( Honestly, Proton GE is basically “Fine, I will fix it myself” in software form. )
 
-**Proton CachyOS — Performance-Focused Chaos**
+**Proton CachyOS - Performance-Focused Chaos**
 
 Since I use CachyOS, I also ended up experimenting with Proton CachyOS builds. These are optimized specifically around newer CPUs, gaming performance, scheduler tweaks, and custom patches. 
 
 The differences are not always gigantic, but sometimes frame pacing improves, shader compilation feels smoother, and responsiveness tightens up. One main reason I use it is simply because it has good parity with my OS.
 
-**Proton DE — The Anime/Gacha Specialist**
+**Proton DE - The Anime/Gacha Specialist**
 
 This one is interesting. Proton DE is heavily discussed around gacha games, anime launchers, and anti-cheat weirdness. Some anime games use strange launchers or DRM systems that behave horribly under standard Proton. 
 
@@ -308,7 +308,7 @@ Then there are launch variables that just make life better: **`gamemoderun mango
 
 ### Then Came The Real Linux Gamer Experience: Cracked Games
 
-And honestly? This is where things become chaos sometimes. Because FitGirl repacks, DODI repacks, OnlineFix releases, and Goldberg emulators—all behave differently under Wine/Proton.
+And honestly? This is where things become chaos sometimes. Because FitGirl repacks, DODI repacks, OnlineFix releases, and Goldberg emulators - all behave differently under Wine/Proton.
 
 Some work immediately. Some completely explode. Some installers behave like cursed software artifacts from another dimension. But surprisingly, a LOT of cracked games genuinely work fine nowadays on Linux.
 
