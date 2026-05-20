@@ -429,6 +429,8 @@ It is basically software inception. And it is incredibly satisfying when you fin
 
 It is exactly this level of control that makes Linux gaming feel so incredibly powerful. Once you learn the rules, you are no longer at the mercy of the operating system. You _are_ the operating system.
 
+![Proton makes it more convincing to move to Linux : r/linuxmemes](/din7f8sanbw71.jpg)
+
 ### Why Am I Like This?
 
 So yeah, that is the current state of my Linux obsession.
