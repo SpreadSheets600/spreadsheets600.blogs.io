@@ -9,20 +9,29 @@ export interface Heading {
   depth: number;
   slug: string;
   text: string;
+  subheadings: Heading[];
 }
 
-function buildToc(headings: Heading[]) {
+function buildToc(headings: { depth: number; slug: string; text: string }[]) {
   const toc: Heading[] = [];
-  const parentHeadings = new Map();
+  const stack: Heading[] = [];
+
   headings.forEach((h) => {
-    const heading = { ...h, subheadings: [] };
-    parentHeadings.set(heading.depth, heading);
-    if (heading.depth === 2) {
+    const heading: Heading = { ...h, subheadings: [] };
+
+    while (stack.length > 0 && stack[stack.length - 1].depth >= heading.depth) {
+      stack.pop();
+    }
+
+    if (stack.length === 0) {
       toc.push(heading);
     } else {
-      parentHeadings.get(heading.depth - 1).subheadings.push(heading);
+      stack[stack.length - 1].subheadings.push(heading);
     }
+
+    stack.push(heading);
   });
+
   return toc;
 }
 ---
