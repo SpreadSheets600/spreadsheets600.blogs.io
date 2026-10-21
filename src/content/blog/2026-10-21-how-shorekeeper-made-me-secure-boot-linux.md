@@ -44,6 +44,7 @@ Come on, you have to taste a little bit of everything in life to know what suits
 I found some peak, ultra-minimal, clean Wuthering Waves wallpapers ( [Link](https://drive.google.com/drive/folders/1GwBykGeMJ3pF_mcbdA9TX9RgzC_3dyzQ?usp=drive_link) ) and built a setup that looked ridiculously good.
 
 ![](/CleanWuWaLinuxSetup.jpeg)
+
 _Tell me this doesn't look clean. Go ahead, lie to yourself._
 
 It's not too flashy to call a full rice, but I like the aesthetics and other aspects that I would love to call it a clean setup something that would want to revisit all the time.
@@ -69,7 +70,6 @@ Well I never preferred dual boot because it always seemed that it would hamper t
 I looked at my 512 GB SSD (which actually gives you around 475 GB of usable space after formatting and system reservations). I did the math :
 
 - **100 GB for CachyOS Linux :** Strictly for coding, development, and daily productivity. 100 GB is more than enough when you aren't hoarding massive game files on it.
-
 - **375 GB for Windows :** Strictly an isolated gaming console. Since I only use it for games that refuse to cooperate on Linux ( Valorant, PUBG, modded co-op games or other story mode games ), 375 GB easily fits four or five massive 60+ GB games at a time.
 
 More importantly, this acts as a mental switch. When I boot into CachyOS, my brain knows it is time to build projects, write code, and focus. When I boot into Windows, it is strictly entertainment mode. Best of both worlds, zero compromise.
@@ -89,9 +89,7 @@ I grabbed a USB drive with **Ventoy** loaded up ( If you still flash single ISOs
 Here is the golden rule of dual booting without losing your sanity : **Always install Windows first.** Windows is a greedy operating system that does not respect roommates. If you install it second, it has a nasty habit of overwriting your Linux bootloader.
 
 1. I installed Windows first, ran my debloat scripts, installed my GPU/chipset drivers, and shrank the main partition down from inside Windows Disk Management to leave 100 GB of unallocated space at the end.
-
 2. I rebooted into Ventoy and launched the CachyOS installer.
-
 3. **The Boot Partition :** During manual partitioning in CachyOS, you have to set up an EFI System Partition (ESP) mounted at `/boot`.
 
 For those who don't know how this works : when your motherboard turns on, it has no idea what Linux or Windows is. It looks for a small FAT32 partition containing `.efi` executable files.
@@ -120,7 +118,7 @@ To fix this, you have to become your own certificate authority using an amazing 
 
 Before Linux can enroll custom Secure Boot keys, your BIOS needs to be in **"Setup Mode"** ( which clears out the locked factory state so it accepts your custom keys ).
 
-Sounds simple, right ? Except I use an **MSI Thin 15**. And MSI, in their infinite wisdom, locks away the granular settings behind a secret developer BIOS menu. If you ever need to unlock the hidden Advanced BIOS on an MSI laptop, you have to boot into the BIOS and press a cheat code like you are unlocking Akuma in Street Fighter : **Hold `Left Alt` + `Right Ctrl` ( or `Fn + Copilot` on newer keyboards ) + `Right Shift` + press `F2`.**
+Sounds simple, right ? Except I use an **MSI Thin 15**. And MSI, in their infinite wisdom, locks away the granular settings behind a secret developer BIOS menu. If you ever need to unlock the hidden Advanced BIOS on an MSI laptop, you have to boot into the BIOS and press a cheat code like you are unlocking Akuma in Street Fighter : **Hold `Left Alt` + **`Right Ctrl` ( or `Fn + Copilot` on newer keyboards ) + `Right Shift` + press `F2`.****
 
 I have the newer keyboard so I need to press that a\*\* button TT
 
@@ -134,8 +132,8 @@ Inside CachyOS, I followed the wiki docs and ran:
 
 ```plain
 sudo pacman -S sbctl
-sudo sbctl create-keys****sudo sbctl enroll-keys --microsoft
-
+sudo sbctl create-keys
+sudo sbctl enroll-keys --microsoft
 ```
 
 _( Note: That `--microsoft` flag is life-saving. Because we are dual-booting Windows, if you enroll ONLY your custom Linux keys without Microsoft's vendor keys, Windows and your GPU firmware will refuse to boot! )_
@@ -152,14 +150,12 @@ That automates the kernel hashes during updates, **but pacman hooks do not autom
 
 ```plain
 b2sum /boot/shorekeeper.png
-
 ```
 
 That spits out a massive 128-character cryptographic string. Then, you open `/boot/limine.conf` and append that exact hash right after the image path using a `#` symbol:
 
 ```plain
 wallpaper: boot():/shorekeeper.png#75205d08fa9c61599897857e...
-
 ```
 
 After that, you lock it all in by running :
@@ -167,7 +163,6 @@ After that, you lock it all in by running :
 ```plain
 sudo limine-enroll-config
 sudo limine-update
-
 ```
 
 Rebooted into BIOS, turned Secure Boot back on, and boom Shorekeeper greeted me in full HD _with_ Secure Boot completely verified and Valorant ready to run on the other side. Honestly, peak engineering.
