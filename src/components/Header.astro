@@ -12,6 +12,7 @@ const isActive = (path: string) => {
 };
 
 const navLinks = [
+  { name: "Home", path: "/" },
   { name: "Blog", path: "/blog" },
   { name: "Links", path: "/links" },
   { name: "Prompts", path: "/prompts" },
@@ -19,11 +20,11 @@ const navLinks = [
 ];
 ---
 
-<header class="sticky top-0 z-50 border-b border-white/10 bg-black/30 backdrop-blur-xl py-0" transition:persist>
+<header class="sticky top-0 z-50 border-b border-white/10 bg-black/60 backdrop-blur-xl py-0" transition:persist>
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
       <Link href="/" underline={false} class="text-lg font-semibold tracking-wide">
-        <span class="bg-gradient-to-r from-white via-white/80 to-white/60 bg-clip-text">
+        <span class="bg-gradient-to-r from-white via-white/80 to-white/60 bg-clip-text text-transparent">
           {SITE.TITLE}
         </span>
       </Link>

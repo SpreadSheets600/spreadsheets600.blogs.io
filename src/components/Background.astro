@@ -1,75 +1,94 @@
 ---
-
 ---
 
 <div class="background-container" transition:persist>
-    <div class="background-image" id="bg-image"></div>
-    <div class="background-overlay"></div>
+  <div class="background-image" id="bg-image"></div>
+  <div class="background-overlay"></div>
 </div>
 
 <script>
-    const backgroundImages = [
-        "https://raw.githubusercontent.com/SpreadSheets600/spreadsheets600.github.io/refs/heads/main/public/1.jpg",
-        "https://raw.githubusercontent.com/SpreadSheets600/spreadsheets600.github.io/refs/heads/main/public/2.jpg",
-        "https://raw.githubusercontent.com/SpreadSheets600/spreadsheets600.github.io/refs/heads/main/public/3.jpg",
-        "https://raw.githubusercontent.com/SpreadSheets600/spreadsheets600.github.io/refs/heads/main/public/4.jpg",
-        "https://raw.githubusercontent.com/SpreadSheets600/spreadsheets600.github.io/refs/heads/main/public/5.jpg",
-    ];
+  const API = "https://spreadsheets600-api-io.spreadsheets600.workers.dev";
+  const KEY = "s600:wallpaper:v2";
+  const MAX_AGE = 24 * 60 * 60 * 1000;
 
-    function setupBackground() {
-        const bgElement = document.getElementById("bg-image");
-        if (bgElement && !bgElement.style.backgroundImage) {
-            const randomIndex = Math.floor(
-                Math.random() * backgroundImages.length,
-            );
-            const selectedImage = backgroundImages[randomIndex];
-            bgElement.style.backgroundImage = `url(${selectedImage})`;
-        }
+  const stored = (): string | null => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(KEY) ?? "null");
+      return saved && typeof saved.url === "string" && Date.now() - saved.at < MAX_AGE ? saved.url : null;
+    } catch {
+      return null;
     }
+  };
 
-    // Initialize on first load
-    setupBackground();
+  const remember = (url: string) => {
+    try {
+      localStorage.setItem(KEY, JSON.stringify({ url, at: Date.now() }));
+    } catch {}
+  };
 
-    // Re-initialize after view transition swap
-    document.addEventListener("astro:after-swap", setupBackground);
+  const show = (url: string) => {
+    const layer = document.getElementById("bg-image");
+    if (!layer) return;
+    const image = new Image();
+    image.decoding = "async";
+    image.onload = () => {
+      layer.style.backgroundImage = `url('${url}')`;
+      requestAnimationFrame(() => layer.classList.add("is-on"));
+    };
+    image.src = url;
+  };
+
+  const load = async () => {
+    let url = stored();
+    if (!url) {
+      try {
+        const response = await fetch(`${API}/header?format=json`);
+        url = response.ok ? ((await response.json()) as { url?: string }).url ?? null : null;
+      } catch {
+        url = null;
+      }
+      if (url) remember(url);
+    }
+    if (url) show(url);
+  };
+
+  const start = () => {
+    const layer = document.getElementById("bg-image");
+    if (layer && !layer.classList.contains("is-on")) void load();
+  };
+
+  start();
+  document.addEventListener("astro:after-swap", start);
 </script>
 
 <style>
-    .background-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        pointer-events: none;
-    }
+  .background-container {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: #0a0a0a;
+  }
 
-    .background-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        transition: opacity 1s ease-in-out;
-    }
+  .background-image {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
 
-    .background-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        backdrop-filter: blur(5px);
-        background:
-            radial-gradient(
-                60% 60% at 50% 10%,
-                rgba(0, 0, 0, 0.08),
-                rgba(0, 0, 0, 0.08)
-            ),
-            rgba(0, 0, 0, 0.8);
-    }
+  .background-image:global(.is-on) {
+    opacity: 1;
+  }
+
+  .background-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(60% 60% at 50% 10%, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.08)),
+      rgba(0, 0, 0, 0.8);
+  }
 </style>
